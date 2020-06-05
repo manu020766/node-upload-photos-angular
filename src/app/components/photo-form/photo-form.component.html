@@ -9,7 +9,7 @@
                     <input type="text" class="form-control" placeholder="Photo's title" required #title>
                 </div>
                 <div class="form-group">
-                   <textarea class="form-control" rows="2" placeholder="Photo's" required></textarea>
+                   <textarea class="form-control" rows="2" placeholder="Photo's" required #description></textarea>
                 </div>
 
                 <div class="form-group" id="subir-foto">
@@ -17,12 +17,16 @@
 
                     <img (click)="photoInput.click()"
                     [src]="photoSelected || 'assets/imagen-no-disponible.jpg'"
-                    class="img-fluid" alt="imagen no disponible">
+                    class="img-fluid" alt="imagen no disponible" style="width: 100%;">
 
+                    <div id="opciones" *ngIf="file">
+                        <img id="opcion-cambiar" (click)="cambiarFoto()" src="assets/change.svg" alt="Cambiar foto" title="Cambiar foto" style="width: 25px;">
+                    </div>
                     <div id="opciones" *ngIf="file">
                         <img id="opcion-borrar" (click)="borrarFoto()" src="assets/waste.svg" alt="Borrar foto" title="Borrar foto" style="width: 25px;">
                     </div>
                 </div>
+                <button (click)="uploadFoto(title, description)" type="submit"  class="btn btn-primary btn-block">UPLOAD</button>
             </form>
         </div>
     </div>

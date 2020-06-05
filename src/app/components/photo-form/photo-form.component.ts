@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core'
+import { PhotoService } from 'src/app/services/photo.service'
 
 interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget
@@ -15,7 +16,7 @@ export class PhotoFormComponent implements OnInit, AfterViewInit {
   file:File
   photoSelected: string | ArrayBuffer
 
-  constructor() { }
+  constructor(private photoService: PhotoService) { }
 
   ngOnInit(): void {
   }
@@ -59,6 +60,16 @@ export class PhotoFormComponent implements OnInit, AfterViewInit {
   borrarFoto() {
     let respuesta = confirm('¿Desea eliminar la foto?')
     console.log('respuesta ', respuesta)
+  }
+  cambiarFoto() {
+    alert('cambiar foto')
+  }
+
+  uploadFoto(title:HTMLInputElement, description:HTMLTextAreaElement):boolean {
+    this.photoService.createPhoto(title.value, description.value, this.file)
+      .subscribe(resultado => console.log(resultado))
+    
+    return false
   }
 
 }
