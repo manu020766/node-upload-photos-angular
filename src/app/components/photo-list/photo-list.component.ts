@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PhotoService } from 'src/app/services/photo.service';
+import { Photo } from 'src/app/interfaces/Photo';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-photo-list',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhotoListComponent implements OnInit {
 
-  constructor() { }
+  photos: Observable<Photo[]>
+  constructor(private photoService:PhotoService) { }
 
   ngOnInit(): void {
+    this.photos = this.photoService.loadPhotos()
   }
 
 }

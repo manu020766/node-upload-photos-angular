@@ -8,7 +8,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { PhotoFormComponent } from './components/photo-form/photo-form.component'
 import { PhotoPreviewComponent } from './components/photo-preview/photo-preview.component'
 import { PhotoListComponent } from './components/photo-list/photo-list.component'
-import { PhotoForm2Component } from './components/photo-form2/photo-form2.component'
+import { PhotoForm2Component } from './components/photo-form2/photo-form2.component';
+import { UrlPhotoPipe } from './pipes/url-photo.pipe'
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PhotoForm2Component } from './components/photo-form2/photo-form2.compon
     PhotoFormComponent,
     PhotoPreviewComponent,
     PhotoListComponent,
-    PhotoForm2Component
+    PhotoForm2Component,
+    UrlPhotoPipe
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { Photo } from '../interfaces/Photo';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +18,11 @@ export class PhotoService {
     fd.append('description', description)
     fd.append('image', photo)
 
-// console.log('title', title)
-// console.log('description', description)
-// console.log('image', photo)
-
     return this.http.post(this.URI, fd)
   }
+
+  loadPhotos():Observable<Photo[]> {
+    return this.http.get<Photo[]>(this.URI)
+  }
+  
 }
