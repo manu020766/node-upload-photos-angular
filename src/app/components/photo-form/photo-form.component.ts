@@ -20,15 +20,34 @@ export class PhotoFormComponent implements OnInit {
   }
 
   onPhotoSelected(event: HtmlInputEvent):void {
-
-    if (event.target.files && event.target.files[0]) {
-      this.file = <File>event.target.files[0]
-
+    let selectedFile = <File>event.target.files[0]
+    if (selectedFile) {
+      this.file = selectedFile
+  
       // image preview
       const reader = new FileReader()
       reader.readAsDataURL(this.file)
       
       reader.onload = (ev: ProgressEvent<FileReader>) => this.photoSelected = reader.result
+    } else {
+       alert('Ningun fichero seleccionado')
     }
   }
+
+  // onPhotoSelected(event: Event):void {
+  //   let file = (<HTMLInputElement>event.target).files[0]  
+  //   console.log(file)
+  //   if (file) {
+  //     this.file = file
+
+  //     // image preview
+  //     const reader = new FileReader()
+  //     reader.readAsDataURL(this.file)
+      
+  //     reader.onload = (ev: ProgressEvent<FileReader>) => this.photoSelected = reader.result
+  //   } else {
+  //     alert('Ningun fichero seleccionado')
+  //   }
+  // }
+
 }
