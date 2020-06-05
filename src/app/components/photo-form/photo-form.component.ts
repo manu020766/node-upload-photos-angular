@@ -56,4 +56,9 @@ export class PhotoFormComponent implements OnInit, AfterViewInit {
   //   }
   // }
 
+  borrarFoto() {
+    let respuesta = confirm('¿Desea eliminar la foto?')
+    console.log('respuesta ', respuesta)
+  }
+
 }
