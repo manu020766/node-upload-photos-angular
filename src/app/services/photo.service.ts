@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Photo } from '../interfaces/Photo';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { Photo } from '../interfaces/Photo'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ export class PhotoService {
 
   private URI = 'http://localhost:4000/api/photos'
 
-  constructor(private http: HttpClient, private router:Router) { }
+  constructor(private http: HttpClient) { }
 
   createPhoto(title:string, description:string, photo:File) {
     let fd = new FormData()

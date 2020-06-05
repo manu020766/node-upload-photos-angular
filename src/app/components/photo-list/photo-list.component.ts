@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PhotoService } from 'src/app/services/photo.service';
-import { Photo } from 'src/app/interfaces/Photo';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { PhotoService } from 'src/app/services/photo.service'
+import { Photo } from 'src/app/interfaces/Photo'
+import { Observable, Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-photo-list',
@@ -12,7 +12,7 @@ export class PhotoListComponent implements OnInit, OnDestroy {
 
   subBorrarPhoto:Subscription
   photos: Observable<Photo[]>
-  constructor(private photoService:PhotoService) { }
+  constructor(private photoService:PhotoService) {}
 
   ngOnInit(): void {
     this.photos = this.photoService.loadPhotos()
@@ -28,7 +28,7 @@ export class PhotoListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subBorrarPhoto.unsubscribe()
+    if (this.subBorrarPhoto) this.subBorrarPhoto.unsubscribe()
   }
 
 }
