@@ -7,6 +7,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { PhotoFormComponent } from './components/photo-form/photo-form.component';
 import { PhotoPreviewComponent } from './components/photo-preview/photo-preview.component';
 import { PhotoListComponent } from './components/photo-list/photo-list.component';
+import { PhotoForm2Component } from './components/photo-form2/photo-form2.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { PhotoListComponent } from './components/photo-list/photo-list.component
     NavigationComponent,
     PhotoFormComponent,
     PhotoPreviewComponent,
-    PhotoListComponent
+    PhotoListComponent,
+    PhotoForm2Component
   ],
   imports: [
     BrowserModule,
