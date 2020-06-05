@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core'
 
 interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget
@@ -9,7 +9,8 @@ interface HtmlInputEvent extends Event {
   templateUrl: './photo-form.component.html',
   styleUrls: ['./photo-form.component.css']
 })
-export class PhotoFormComponent implements OnInit {
+export class PhotoFormComponent implements OnInit, AfterViewInit {
+  @ViewChild('title') titleElement: ElementRef
 
   file:File
   photoSelected: string | ArrayBuffer
@@ -17,6 +18,9 @@ export class PhotoFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  ngAfterViewInit() {
+    this.titleElement.nativeElement.focus()
   }
 
   onPhotoSelected(event: HtmlInputEvent):void {

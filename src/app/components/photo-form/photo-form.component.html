@@ -1,22 +1,25 @@
 <div class="col-lg-4 mx-auto">
     <div class="card">
         <div class="card-header">
-            Upload a Photo
+            <h3>Upload a Photo</h3>
         </div>
         <div class="card-body">
             <form >
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Photo's title" required>
+                    <input type="text" class="form-control" placeholder="Photo's title" required #title>
                 </div>
                 <div class="form-group">
                    <textarea class="form-control" rows="2" placeholder="Photo's" required></textarea>
                 </div>
 
-                <input #photoInput (change)="onPhotoSelected($event)" type="file" class="d-none">
-                <img (click)="photoInput.click()"
-                [src]="photoSelected || 'assets/imagen-no-disponible.jpg'"
-                class="img-fluid" alt="imagen no disponible">
-                
+                <div class="form-group">
+                    <input #photoInput (change)="onPhotoSelected($event)" type="file" class="d-none">
+
+                    <img (click)="photoInput.click()"
+                    [src]="photoSelected || 'assets/imagen-no-disponible.jpg'"
+                    class="img-fluid" alt="imagen no disponible">
+                </div>
+
             </form>
         </div>
     </div>
