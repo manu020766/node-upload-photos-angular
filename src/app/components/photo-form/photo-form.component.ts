@@ -34,6 +34,8 @@ export class PhotoFormComponent implements OnInit {
     }
   }
 
+  // la forma más simple para eliminar el problema, aunque no la más adecuada es poner (event:any)
+
   // onPhotoSelected(event: Event):void {
   //   let file = (<HTMLInputElement>event.target).files[0]  
   //   console.log(file)

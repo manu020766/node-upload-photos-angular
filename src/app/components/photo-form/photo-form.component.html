@@ -11,10 +11,12 @@
                 <div class="form-group">
                    <textarea class="form-control" rows="2" placeholder="Photo's" required></textarea>
                 </div>
+
                 <input #photoInput (change)="onPhotoSelected($event)" type="file" class="d-none">
                 <img (click)="photoInput.click()"
                 [src]="photoSelected || 'assets/imagen-no-disponible.jpg'"
                 class="img-fluid" alt="imagen no disponible">
+                
             </form>
         </div>
     </div>
