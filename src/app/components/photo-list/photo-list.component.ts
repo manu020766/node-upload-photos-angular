@@ -12,6 +12,7 @@ export class PhotoListComponent implements OnInit, OnDestroy {
 
   subBorrarPhoto:Subscription
   photos: Observable<Photo[]>
+
   constructor(private photoService:PhotoService) {}
 
   ngOnInit(): void {
@@ -29,6 +30,10 @@ export class PhotoListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.subBorrarPhoto) this.subBorrarPhoto.unsubscribe()
+  }
+
+  photoTrack(index:number, photo:Photo) { 
+    return photo ? photo._id : undefined
   }
 
 }

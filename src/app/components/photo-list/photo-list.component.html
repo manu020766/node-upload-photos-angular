@@ -1,5 +1,8 @@
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-    <div class="col my-3" *ngFor="let photo of photos | async" [attr.data-photo-id]="photo._id" #messageEl>
+    <div class="col my-3"
+          *ngFor="let photo of photos | async; trackBy: photoTrack" 
+          [attr.data-photo-id]="photo._id"
+          #messageEl>
       <div class="card" style="height: 230px;">
         <div style="width: 100%; height: 150px; overflow: hidden;">
             <img [src]="photo.imagePath | urlPhoto" [alt]="photo.title" class="img-fluid">
