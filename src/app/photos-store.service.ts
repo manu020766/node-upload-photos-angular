@@ -18,9 +18,23 @@ export class PhotosStoreService {
     this._photos.next(val)
   }
 
+  async createPhoto(title:string, description:string, photoFile:File) {
+    let photoSave = await this.photoService.createPhoto(title, description, photoFile).toPromise()
+  
+    let photoNew = {
+      _id: photoSave.photo._id,
+      title: photoSave.photo.title,
+      description: photoSave.photo.description,
+      imagePath: photoSave.photo.imagePath
+    }
+    this.photos = [ ...this.photos, photoNew ]
+
+    console.log('PHOTOS: ', this.photos)
+  }
+
   async deletePhoto(id: string) {
     this.photos = this.photos.filter(photo => photo._id !== id)
-    let photo = await this.photoService.deletePhoto(id).toPromise()
+    await this.photoService.deletePhoto(id).toPromise()
   }
 
   async loadPhotos() {

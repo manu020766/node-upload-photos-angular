@@ -3,6 +3,16 @@ import { HttpClient } from '@angular/common/http'
 import { Photo } from '../interfaces/Photo'
 import { Observable } from 'rxjs'
 
+interface photoRes {
+  message:string
+  photo: {
+    _id:string,
+    title:string,
+    description:string,
+    imagePath:string
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,13 +22,13 @@ export class PhotoService {
 
   constructor(private http: HttpClient) { }
 
-  createPhoto(title:string, description:string, photo:File) {
+  createPhoto(title:string, description:string, photo:File):Observable<photoRes> {
     let fd = new FormData()
     fd.append('title', title)
     fd.append('description', description)
     fd.append('image', photo)
 
-    return this.http.post(this.URI, fd)
+    return this.http.post<photoRes>(this.URI, fd)
   }
 
   loadPhotos():Observable<Photo[]> {

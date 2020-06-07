@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core'
 import { PhotoService } from 'src/app/services/photo.service'
 import { Router } from '@angular/router'
+import { PhotosStoreService } from 'src/app/photos-store.service'
 
 interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget
@@ -17,7 +18,8 @@ export class PhotoFormComponent implements OnInit, AfterViewInit {
   file:File
   photoSelected: string | ArrayBuffer
 
-  constructor(private photoService:PhotoService, private router:Router) { }
+  // constructor(private photoService:PhotoService, private router:Router) { }
+  constructor(private photoStoreService:PhotosStoreService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -66,10 +68,16 @@ export class PhotoFormComponent implements OnInit, AfterViewInit {
     alert('cambiar foto')
   }
 
-  uploadFoto(title:HTMLInputElement, description:HTMLTextAreaElement):boolean {
-    this.photoService.createPhoto(title.value, description.value, this.file)
-      .subscribe(resultado => this.router.navigate(['/photos']))
+  // uploadFoto(title:HTMLInputElement, description:HTMLTextAreaElement):boolean {
+  //   this.photoService.createPhoto(title.value, description.value, this.file)
+  //     .subscribe(resultado => this.router.navigate(['/photos']))
 
+  //   return false
+  // }
+
+  uploadFoto(title:HTMLInputElement, description:HTMLTextAreaElement):boolean {
+    this.photoStoreService.createPhoto(title.value, description.value, this.file)
+          .then(() => this.router.navigate(['/photos']))
     return false
   }
 
