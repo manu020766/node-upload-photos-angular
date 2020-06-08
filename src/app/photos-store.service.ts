@@ -10,12 +10,14 @@ export class PhotosStoreService {
 
   private readonly _photos = new BehaviorSubject<Photo[]>([])
   readonly photos$ = this._photos.asObservable()
+  photosContador
 
   private get photos():Photo[] {
     return this._photos.getValue()
   }
   private set photos(val:Photo[]) {
     this._photos.next(val)
+    this.photosContador = this.photos.length
   }
 
   async createPhoto(title:string, description:string, photoFile:File) {
@@ -39,6 +41,16 @@ export class PhotosStoreService {
 
   async loadPhotos() {
     this.photos = await this.photoService.loadPhotos().toPromise()
+  }
+
+  async loadPhotoByTitleDes(id:string) {
+    console.log(id)
+    if (!id) {
+      this.loadPhotos()
+      return
+    }
+    this.photos = this.photos.filter(p => p.title.includes(id) || p.description.includes(id))
+    this.photos = await this.photoService.loadPhotoByTitleDes(id).toPromise()
   }
 
   constructor(private photoService: PhotoService) { 

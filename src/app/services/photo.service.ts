@@ -39,4 +39,8 @@ export class PhotoService {
     return this.http.delete<Photo>(`${this.URI}/${photoId}`)
   }
 
+  loadPhotoByTitleDes(id:string):Observable<Photo[]> {
+    return this.http.get<Photo[]>(`${this.URI}/${id}/buscar`)
+  }
+
 }
