@@ -3,6 +3,7 @@ import { Photo } from 'src/app/interfaces/Photo'
 import { PhotosStoreService } from 'src/app/photos-store.service'
 import { Subject } from 'rxjs'
 import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators'
+import { Router } from '@angular/router'
 
 interface KeyboardEvent extends Event {
   target: HTMLInputElement & EventTarget
@@ -17,7 +18,9 @@ export class PhotoListComponent implements OnDestroy {
 
   private _searchSubject: Subject<string> = new Subject()
   
-  constructor(public photoStore: PhotosStoreService) {
+  constructor(
+    public photoStore: PhotosStoreService,
+    private router:Router) {
     this._setSearchSubscription()
   }
 
@@ -48,7 +51,8 @@ export class PhotoListComponent implements OnDestroy {
     // -- TODO  
   }
   viewPhoto(el) {
-    // -- TODO  
+    let photoId = el.getAttribute('data-photo-id')
+    this.router.navigate(['/photos', photoId ])
   }
 
   photoTrack(index:number, photo:Photo) { 

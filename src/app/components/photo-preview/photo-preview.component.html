@@ -1,1 +1,17 @@
-<p>photo-preview works!</p>
+<div class="card mt-5" *ngIf="photo; else noHayDatos">
+    <div class="row no-gutters">
+      <div class="col-md-6">
+        <img [src]="photo.imagePath | urlPhoto" [alt]="photo.title" class="img-fluid">
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+          <h2 class="card-title text-warning">{{ photo.title }}</h2>
+          <p class="card-text text-light mt-5">{{ photo.description }}</p>
+        </div>
+      </div>
+    </div> 
+    <div class="btn btn-primary btn-block" routerLink="/photos">Volver al listado</div>
+</div>
+<ng-template class="row" #noHayDatos>
+    <div class="btn btn-primary btn-block" routerLink="/photos">Volver al listado</div>
+</ng-template>

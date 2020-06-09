@@ -43,6 +43,10 @@ export class PhotosStoreService {
     this.photos = await this.photoService.loadPhotos().toPromise()
   }
 
+  loadPhotoViewId(id: string) {
+    return this.photos.find(photo => photo._id === id)
+  }
+
   async loadPhotoByTitleDes(id:string) {
     console.log(id)
     if (!id) {

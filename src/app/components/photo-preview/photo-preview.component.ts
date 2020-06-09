@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Photo } from 'src/app/interfaces/Photo';
+import { PhotosStoreService } from 'src/app/photos-store.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-photo-preview',
@@ -7,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhotoPreviewComponent implements OnInit {
 
-  constructor() { }
+  photo: Photo
 
+  constructor(private route:ActivatedRoute,
+              private photoStoreService: PhotosStoreService,
+              private router: Router) {}
+              
   ngOnInit(): void {
+    this.route.paramMap
+      .pipe(take(1)) //Unsuscribe automatically
+      .subscribe( params => {
+      this.photo = this.photoStoreService.loadPhotoViewId(params.get('id'))
+    })
   }
 
 }
