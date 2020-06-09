@@ -34,6 +34,10 @@ export class PhotoListComponent implements OnDestroy {
     })
   }
 
+  public buscarPhoto(term: string) {
+    this.photoStore.loadPhotoByTitleDes(term)
+  }
+
   public updateSearch(searchTextValue: string) {
     this._searchSubject.next( searchTextValue );
   }

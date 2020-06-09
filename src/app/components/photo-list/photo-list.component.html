@@ -1,11 +1,12 @@
 <div class="row">
     <div class="input-group mb-3">
-        <input type="text" class="form-control"
+        <input type="text" class="form-control" #buscar
+            (keydown.enter)="buscarPhoto(buscar.value)"
             (keyup)="updateSearch($event.target.value)"
             style="border: 1px solid #2196F3; padding: 12px; border-radius: 5px 0 0 5px;"
             placeholder="Buscar por Título o Descripción">
         <div class="input-group-append">
-          <button class="btn btn-primary" type="button" id="button-addon2">Buscar</button>
+          <button (click)="buscarPhoto(buscar.value)"  class="btn btn-primary" type="button" id="button-addon2">Buscar</button>
         </div>
     </div>
 </div>
