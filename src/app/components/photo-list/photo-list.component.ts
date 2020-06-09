@@ -39,9 +39,16 @@ export class PhotoListComponent implements OnDestroy {
     this._searchSubject.unsubscribe();
   }
 
-  BorrarPhoto(el) {
+  borrarPhoto(el) {
   let photoId = el.getAttribute('data-photo-id') 
   this.photoStore.deletePhoto(photoId)
+  }
+
+  editarPhoto(el) {
+    // -- TODO  
+  }
+  viewPhoto(el) {
+    // -- TODO  
   }
 
   photoTrack(index:number, photo:Photo) { 
