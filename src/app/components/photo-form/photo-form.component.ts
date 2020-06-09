@@ -109,4 +109,8 @@ export class PhotoFormComponent implements OnInit, AfterViewInit {
     return false
   }
 
+  cancelarUploadFoto() {
+    this.router.navigate(['/photos'])
+  }
+
 }

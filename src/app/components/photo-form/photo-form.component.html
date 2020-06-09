@@ -34,7 +34,8 @@
                         <img id="opcion-borrar" (click)="borrarFoto()" src="assets/waste.svg" alt="Borrar foto" title="Borrar foto" style="width: 25px;">
                     </div>
                 </div>
-                <button (click)="uploadFoto(title, description)" type="submit"  class="btn btn-primary btn-block">UPLOAD</button>
+                <button (click)="cancelarUploadFoto()" type="submit"  class="btn btn-warning" style="width: 50%;">CANCELAR</button>
+                <button (click)="uploadFoto(title, description)" type="submit"  class="btn btn-primary" style="width: 50%;">UPLOAD</button>
             </form>
         </div>
     </div>
