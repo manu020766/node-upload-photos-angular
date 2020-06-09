@@ -9,15 +9,23 @@
                     <input type="text" class="form-control" placeholder="Photo's title" required #title>
                 </div>
                 <div class="form-group">
-                   <textarea class="form-control" rows="2" placeholder="Photo's" required #description></textarea>
+                   <textarea class="form-control" rows="6" placeholder="Photo's description" required #description></textarea>
                 </div>
 
                 <div class="form-group" id="subir-foto">
                     <input #photoInput (change)="onPhotoSelected($event)" type="file" class="d-none">
 
-                    <img (click)="photoInput.click()"
-                    [src]="photoSelected || 'assets/imagen-no-disponible.jpg'"
-                    class="img-fluid" alt="imagen no disponible" style="width: 100%;">
+                    <ng-container *ngIf="formType === 'editar'">
+                        <img
+                        [src]="photo.imagePath | urlPhoto"
+                        class="img-fluid" style="width: 100%;">
+                    </ng-container>
+
+                    <ng-container *ngIf="formType === 'alta'">
+                        <img (click)="photoInput.click()"
+                        [src]="photoSelected || 'assets/imagen-no-disponible.jpg'"
+                        class="img-fluid" alt="imagen no disponible" style="width: 100%;">
+                    </ng-container>
 
                     <div id="opciones" *ngIf="file">
                         <img id="opcion-cambiar" (click)="cambiarFoto()" src="assets/change.svg" alt="Cambiar foto" title="Cambiar foto" style="width: 25px;">

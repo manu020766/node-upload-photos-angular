@@ -8,6 +8,7 @@ import { PhotoForm2Component } from './components/photo-form2/photo-form2.compon
 const routes: Routes = [
   { path: 'photos', component: PhotoListComponent },
   { path: 'photos/new', component: PhotoFormComponent },
+  { path: 'photos/:id/editar', component: PhotoFormComponent },
   { path: 'photos/experimento', component: PhotoForm2Component },
   { path: 'photos/:id', component: PhotoPreviewComponent },
   { path: '', redirectTo: '/photos', pathMatch: 'full' },

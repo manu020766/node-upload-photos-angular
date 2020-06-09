@@ -52,8 +52,10 @@ export class PhotoListComponent implements OnDestroy {
   }
 
   editarPhoto(el) {
-    // -- TODO  
+    let photoId = el.getAttribute('data-photo-id') 
+    this.router.navigate(['/photos', photoId, 'editar' ])
   }
+  
   viewPhoto(el) {
     let photoId = el.getAttribute('data-photo-id')
     this.router.navigate(['/photos', photoId ])

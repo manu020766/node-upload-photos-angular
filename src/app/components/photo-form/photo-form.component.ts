@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core'
-import { PhotoService } from 'src/app/services/photo.service'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { PhotosStoreService } from 'src/app/photos-store.service'
+import { take } from 'rxjs/operators'
+import { Photo } from 'src/app/interfaces/Photo'
 
 interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget
@@ -14,16 +15,36 @@ interface HtmlInputEvent extends Event {
 })
 export class PhotoFormComponent implements OnInit, AfterViewInit {
   @ViewChild('title') titleElement: ElementRef
+  @ViewChild('description') descriptionElement: ElementRef
 
   file:File
   photoSelected: string | ArrayBuffer
+  formType = 'alta'
+  photo: Photo
 
   // constructor(private photoService:PhotoService, private router:Router) { }
-  constructor(private photoStoreService:PhotosStoreService, private router:Router) { }
+  constructor(private photoStoreService:PhotosStoreService,
+              private router:Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.formType = 'alta'
+    if (this.route.routeConfig.path.indexOf('editar') > 0) {
+      this.formType = 'editar'
+      this.route.paramMap
+      .pipe(take(1)) //Unsuscribe automatically
+      .subscribe(params => {
+        this.photo = this.photoStoreService.loadPhotoViewId(params.get('id'))
+      })
+    }
+    
   }
   ngAfterViewInit() {
+    if (this.formType === 'editar') {
+      this.titleElement.nativeElement.value = this.photo.title
+      this.descriptionElement.nativeElement.value = this.photo.description
+    }
+
     this.titleElement.nativeElement.focus()
   }
 
@@ -76,8 +97,15 @@ export class PhotoFormComponent implements OnInit, AfterViewInit {
   // }
 
   uploadFoto(title:HTMLInputElement, description:HTMLTextAreaElement):boolean {
-    this.photoStoreService.createPhoto(title.value, description.value, this.file)
-          .then(() => this.router.navigate(['/photos']))
+    if (this.formType === 'alta') {
+      this.photoStoreService.createPhoto(title.value, description.value, this.file)
+            .then(() => this.router.navigate(['/photos']))
+    }
+
+    if (this.formType === 'editar') {
+      //-- TODO PENDIENTE DE SALVAR LA EDICION
+    }
+
     return false
   }
 
