@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Photo } from 'src/app/interfaces/Photo';
 import { PhotosStoreService } from 'src/app/photos-store.service';
 import { take } from 'rxjs/operators';
@@ -14,8 +14,7 @@ export class PhotoPreviewComponent implements OnInit {
   photo: Photo
 
   constructor(private route:ActivatedRoute,
-              private photoStoreService: PhotosStoreService,
-              private router: Router) {}
+              private photoStoreService: PhotosStoreService) {}
               
   ngOnInit(): void {
     this.route.paramMap
