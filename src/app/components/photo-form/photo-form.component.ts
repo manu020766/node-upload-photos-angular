@@ -35,9 +35,14 @@ export class PhotoFormComponent implements OnInit, AfterViewInit {
       .pipe(take(1)) //Unsuscribe automatically
       .subscribe(params => {
         this.photo = this.photoStoreService.loadPhotoViewId(params.get('id'))
+        const urlImage = 'http://localhost:4000/uploads' + this.photo.imagePath.slice(7)
+
+        toDataURL(urlImage)
+          .then((dataUrl:string) => {
+              this.photoSelected = dataUrl
+          })
       })
     }
-    
   }
   ngAfterViewInit() {
     if (this.formType === 'editar') {
@@ -113,4 +118,16 @@ export class PhotoFormComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/photos'])
   }
 
+}
+
+function toDataURL(url) {
+  return fetch(url)
+  .then(response => response.blob())
+  .then(blob => new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.onerror = reject
+      reader.readAsDataURL(blob)
+      })
+  )
 }
