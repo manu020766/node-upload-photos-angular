@@ -37,15 +37,13 @@ export class PhotosStoreService {
   async updatePhoto(photoId:string, title:string, description:string, photoFile:File) {
     let photoSave = await this.photoService.updatePhoto(photoId, title, description, photoFile).toPromise()
   
-    // let photoNew = {
-    //   _id: photoSave.photo._id,
-    //   title: photoSave.photo.title,
-    //   description: photoSave.photo.description,
-    //   imagePath: photoSave.photo.imagePath
-    // }
-    // this.photos = [ ...this.photos, photoNew ]
+    let photoUpdateIndex = this.photos.findIndex(p => p._id === photoId)
 
-    console.log('PHOTOS: ', this.photos)
+    this.photos[photoUpdateIndex].title = photoSave.photo?.title
+    this.photos[photoUpdateIndex].description = photoSave.photo?.description
+    this.photos[photoUpdateIndex].imagePath = photoSave.photo?.imagePath
+
+    this.photos = [ ...this.photos ]
   }
 
   async deletePhoto(id: string) {
