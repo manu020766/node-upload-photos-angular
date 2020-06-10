@@ -35,12 +35,18 @@ export class PhotoFormComponent implements OnInit, AfterViewInit {
       .pipe(take(1)) //Unsuscribe automatically
       .subscribe(params => {
         this.photo = this.photoStoreService.loadPhotoViewId(params.get('id'))
-        const urlImage = 'http://localhost:4000/uploads' + this.photo.imagePath.slice(7)
 
-        toDataURL(urlImage)
-          .then((dataUrl:string) => {
-              this.photoSelected = dataUrl
-          })
+        let urlImage:string
+        if (this.photo.imagePath) {
+          urlImage = 'http://localhost:4000/uploads' + this.photo.imagePath.slice(7)
+
+          toDataURL(urlImage)
+            .then((dataUrl:string) => {
+                this.photoSelected = dataUrl
+            })
+        } else {
+          this.photoSelected = null
+        }
       })
     }
   }
@@ -103,12 +109,25 @@ export class PhotoFormComponent implements OnInit, AfterViewInit {
 
   uploadFoto(title:HTMLInputElement, description:HTMLTextAreaElement):boolean {
     if (this.formType === 'alta') {
+      console.log('FILE: ', this.file)
       this.photoStoreService.createPhoto(title.value, description.value, this.file)
             .then(() => this.router.navigate(['/photos']))
     }
 
     if (this.formType === 'editar') {
-      //-- TODO PENDIENTE DE SALVAR LA EDICION
+
+      console.log('old image: ', this.photo?.imagePath)
+      console.log('nueva image: ', this.file?.name, this.file)
+      
+      if (title.value !== this.photo.title || description.value !== this.photo.description || this.file?.name !== undefined ) {
+        this.photoStoreService.updatePhoto(this.photo._id, title.value, description.value, this.file)
+              .then(() => this.router.navigate(['/photos']))
+      } else {
+        console.log('NO HAY QUE ACTUALIZAR')
+      }
+
+
+
     }
 
     return false

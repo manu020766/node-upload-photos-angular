@@ -31,6 +31,15 @@ export class PhotoService {
     return this.http.post<photoRes>(this.URI, fd)
   }
 
+  updatePhoto(photoId:string, title:string, description:string, photo:File):Observable<photoRes> {
+    let fd = new FormData()
+    fd.append('title', title)
+    fd.append('description', description)
+    fd.append('image', photo)
+
+    return this.http.put<photoRes>(`${this.URI}/${photoId}`, fd)
+  }
+
   loadPhotos():Observable<Photo[]> {
     return this.http.get<Photo[]>(this.URI)
   }
